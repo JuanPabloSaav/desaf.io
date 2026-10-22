@@ -49,7 +49,21 @@ function getTemplateStylesheet(template) {
  */
 export function addLinkToHead(template) {
   const templateStylesheet = getTemplateStylesheet(template);
+  if (!templateStylesheet) {
+    console.error(`El template esta vacio`);
+    return
+  }
+
   const objectiveHead = document.querySelector("head");
-  objectiveHead.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${templateStylesheet}">`);
+  if (!objectiveHead) {
+    console.error("No se encontro el head en el dom");
+    return
+  }
+
+  if (!objectiveHead.querySelector(`link[href="${templateStylesheet}"]`)) {
+    console.log("insertando link con stylesheet");
+    objectiveHead.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${templateStylesheet}">`);
+  }
+
 }
 
