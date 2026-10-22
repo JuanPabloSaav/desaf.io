@@ -7,9 +7,9 @@ import { getTemplate, addLinkToHead } from '../utils/general.js';
  * Solo pensado para cargar la estructura del leaderboard pero los jugadores deben
  * ser cargados con un script aparte para el desafio especifico (asi reutilizamos el template y el script).
  */
-export function loadLeaderboard() {
+export function loadLeaderboard(objectiveClassName) {
   // Se obtiene el contenedor del leaderboard en el DOM
-  const leaderboardContainer = document.querySelector('.leaderboard-container');
+  const leaderboardContainer = document.querySelector(objectiveClassName ?? '.leaderboard-container');
 
   if (!leaderboardContainer) {
     console.error('No se encontró el contenedor del leaderboard');

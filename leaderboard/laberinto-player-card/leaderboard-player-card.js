@@ -1,6 +1,11 @@
 import { getTemplate, addLinkToHead } from "../../utils/general.js";
 
-export function loadPlayerCards() {
+export function loadPlayerCards(objectiveClassName) {
+
+  const leaderboardList = document.querySelector(objectiveClassName ?? ".leaderboard-list");
+  if (!leaderboardList) {
+    throw new Error(`No se encontró el elemento con classname: ${objectiveClassName}`);
+  }
 
   const players = getPlayerData(); // Fetch player data from the server (copilot vendepatria)
   if (!players || players.length === 0) {
@@ -8,10 +13,7 @@ export function loadPlayerCards() {
     return;
   }
 
-  const leaderboardList = document.querySelector('.leaderboard-list');
-  if (!leaderboardList) {
-    throw new Error('No se encontró el elemento con classname "leaderboard-list"');
-  }
+
 
   return getTemplate(
     'leaderboard/laberinto-player-card/leaderboard-player-card.html',
