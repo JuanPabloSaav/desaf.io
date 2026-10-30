@@ -10,7 +10,7 @@ import { getTemplate, addLinkToHead } from '../utils/general.js';
 export function loadLeaderboard(objectiveClassName) {
   // Se obtiene el contenedor del leaderboard en el DOM
   const leaderboardContainer = document.querySelector(objectiveClassName ?? '.leaderboard-container');
-
+  // aca no seria:             document.getElementsByClassName('.leaderboard-container')?
   if (!leaderboardContainer) {
     console.error('No se encontró el contenedor del leaderboard');
     return;
