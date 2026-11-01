@@ -34,36 +34,42 @@ export async function getTemplate(url, templateId) {
   return template;
 }
 
-function getTemplateStylesheet(template) {
+function getTemplateStylesheet(template, url) {
+  let templateStylesheet = null;
   if (!template || !template.getAttribute('data-stylesheet')) {
-    console.error('El template no tiene un atributo data-stylesheet');
-    throw new Error('El template no tiene un atributo data-stylesheet');
+    console.log(`El template ${template} no tiene un atributo data-stylesheet, ignorando...`);;
+  } else {
+    let stylesheetName = template.getAttribute('data-stylesheet');
+    // Se obtiene la URL base del documento actual para poder construir la URL completa del stylesheet (evita que siga el template.html y lo cambia por el css)
+    templateStylesheet = new URL(stylesheetName, url);
+
   }
-  console.log('El template tiene un atributo data-stylesheet:', template.getAttribute('data-stylesheet'));
-  return template.getAttribute('data-stylesheet');
+  return templateStylesheet;
 }
 
 /**
  * Agrega un link al head del documento para cargar el stylesheet del template.
  * @param {HTMLTemplateElement} template - El elemento de template que contiene el atributo data-stylesheet.
  */
-export function addLinkToHead(template) {
-  const templateStylesheet = getTemplateStylesheet(template);
+export function addLinkToHead(template, url) {
+  const baseUrl = new URL(url, window.location.href);
+  const templateStylesheet = getTemplateStylesheet(template, baseUrl);
   if (!templateStylesheet) {
     console.error(`El template esta vacio`);
     return
   }
 
+  // Siempre se debe agregar el link al head del documento, si no existe ya uno con el mismo href
   const objectiveHead = document.querySelector("head");
   if (!objectiveHead) {
     console.error("No se encontro el head en el dom");
     return
   }
 
-  if (!objectiveHead.querySelector(`link[href="${templateStylesheet}"]`)) {
+  //verifica si ya existe un link con el mismo href, si no existe lo agrega
+  if (!objectiveHead.querySelector(`link[href="${templateStylesheet.href}"]`)) {
     console.log("insertando link con stylesheet");
-    objectiveHead.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${templateStylesheet}">`);
+    objectiveHead.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${templateStylesheet.href}">`);
   }
-
 }
 
