@@ -1,7 +1,7 @@
 import { getTemplate, addLinkToHead } from '../../utils/general.js';
 
 export function loadProfileCard(objectiveClassName) {
-  const url = 'components/profile-card/profile-card.html';
+  const url = new URL('./profile-card.html', import.meta.url).href;
   const templateId = 'profile-card-template';
 
   // Se obtiene el contenedor del profile card en el DOM
@@ -49,7 +49,7 @@ function getPlayerData() {
   // Simulación de datos del jugador (en un caso real, estos datos podrían provenir de una API o base de datos)
   return {
     name: 'Jugador 1',
-    img: 'imagenes/imagen-perfil-1.png',
+    img: new URL('../../imagenes/imagen-perfil-1.png', import.meta.url).href,
     xpCurrent: 1500,
     xpMax: 2000,
     level: 5

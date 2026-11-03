@@ -8,7 +8,7 @@ import { getTemplate, addLinkToHead } from '../../utils/general.js';
  * ser cargados con un script aparte para el desafio especifico (asi reutilizamos el template y el script).
  */
 export function loadLeaderboard(objectiveClassName) {
-  const url = 'components/leaderboard/leaderboard.html';
+  const url = new URL('./leaderboard.html', import.meta.url).href;
   const templateId = 'leaderboard-template';
 
   // Se obtiene el contenedor del leaderboard en el DOM

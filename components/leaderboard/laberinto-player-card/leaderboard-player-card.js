@@ -13,7 +13,7 @@ export function loadPlayerCards(objectiveClassName) {
     return;
   }
 
-  const url = 'components/leaderboard/laberinto-player-card/leaderboard-player-card.html';
+  const url = new URL('./leaderboard-player-card.html', import.meta.url).href;
   const templateId = 'leaderboard-player-card-template';
 
   return getTemplate(
@@ -48,7 +48,7 @@ function addPlayerCards(players, template, leaderboardList) {
     li.querySelector('.leaderboard-player-statistics strong').textContent = player.score;
     li.querySelector('.leaderboard-player-rank').textContent = player.rank;
     li.querySelector('.avatar').src = player.img;
-    li.querySelector('a').href = "profile.html?player=" + encodeURIComponent(player.name);
+    li.querySelector('a').href = "/profile?player=" + encodeURIComponent(player.name);
     //se asigna el li al leaderboard
     leaderboardList.appendChild(li);
   });
@@ -56,11 +56,12 @@ function addPlayerCards(players, template, leaderboardList) {
 
 function getPlayerData() {
   // Simulación de datos de jugadores (en un caso real, estos datos podrían provenir de una API o base de datos)
+  const getImgUrl = (file) => new URL(`../../../imagenes/${file}`, import.meta.url).href;
   return [
-    { name: 'Jugador 1', score: 1500, img: 'imagenes/imagen-perfil-1.png', rank: 1 },
-    { name: 'Jugador 2', score: 1200, img: 'imagenes/imagen-perfil-2.png', rank: 2 },
-    { name: 'Jugador 3', score: 900, img: 'imagenes/imagen-perfil-3.png', rank: 3 },
-    { name: 'Jugador 4', score: 800, img: 'imagenes/imagen-perfil-1.png', rank: 4 },
-    { name: 'Jugador 5', score: 700, img: 'imagenes/imagen-perfil-1.png', rank: 5 },
+    { name: 'Jugador 1', score: 1500, img: getImgUrl('imagen-perfil-1.png'), rank: 1 },
+    { name: 'Jugador 2', score: 1200, img: getImgUrl('imagen-perfil-2.png'), rank: 2 },
+    { name: 'Jugador 3', score: 900, img: getImgUrl('imagen-perfil-3.png'), rank: 3 },
+    { name: 'Jugador 4', score: 800, img: getImgUrl('imagen-perfil-1.png'), rank: 4 },
+    { name: 'Jugador 5', score: 700, img: getImgUrl('imagen-perfil-1.png'), rank: 5 },
   ];
 }

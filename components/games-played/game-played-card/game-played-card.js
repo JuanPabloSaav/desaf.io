@@ -1,8 +1,8 @@
-import { getTemplate, addLinkToHead } from "../../../utils/general";
+import { getTemplate, addLinkToHead } from "../../../utils/general.js";
 
 export function loadGamesPlayedCard(objectiveClassName) {
-  const url = "components/game-played/games-played-card/games-played-card.html";
-  const templateId = "games-played-list-template";
+  const url = new URL('./game-player-card.html', import.meta.url).href;
+  const templateId = "game-played-card-template";
 
   // Se obtiene el contenedor del games played card en el DOM
   const gamesPlayedCardContainer = document.querySelector(objectiveClassName ?? ".games-played-list");
@@ -40,9 +40,9 @@ function addGamesDataToCard(gameHistory, template, gamesPlayedCardContainer) {
     li.appendChild(clone.cloneNode(true));
 
     //se asigna a la tarjeta los datos del jugador
-    li.querySelector('stat-title').textContent = game.name;
-    li.querySelector('stat-type').textContent = game.type;
-    li.querySelector('stat-value').textContent = game.score;
+    li.querySelector('.stat-title').textContent = game.name;
+    li.querySelector('.stat-type').textContent = game.type;
+    li.querySelector('.stat-value').textContent = game.score;
 
     gamesPlayedCardContainer.appendChild(li);
   });
