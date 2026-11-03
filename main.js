@@ -1,7 +1,7 @@
-import { loadPlayerCards } from "./leaderboard/laberinto-player-card/leaderboard-player-card.js";
-import { loadLeaderboard } from "./leaderboard/leaderboard.js";
+import { loadPlayerCards } from "./components/leaderboard/laberinto-player-card/leaderboard-player-card.js";
+import { loadLeaderboard } from "./components/leaderboard/leaderboard.js";
 
-await loadLeaderboard().then(async () => {
+await loadLeaderboard(".leaderboard-container").then(async () => {
   await loadPlayerCards();
 });
 
