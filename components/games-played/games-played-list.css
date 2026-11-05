@@ -1,23 +1,18 @@
 .games-played-list-container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
-
-  justify-content: space-between;
-  margin: 0;
   height: 300px;
+  margin: 0;
+  min-height: 100px;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-direction: column;
-  align-items: center; 
-  min-height: 100px;
-  width: 100%;
   border: 2px solid rgb(0, 30, 58);
   border-radius: 10px;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: rgb(255, 160, 75);
-
-  
 }
 
 .games-played-list {
@@ -25,7 +20,7 @@
   padding: 0;
   margin: 0;
   width: 100%;
+  height: 100%;
   overflow-y: auto;
-
+  overflow-x: hidden;
 }
-
